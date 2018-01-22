@@ -24,7 +24,7 @@ A few reasons:
 * GitHub
 * Jon Duckett HTML & CSS book
 * Jon Duckett JavaScript & jQuery book
-* Help from my teacher, classmates and TAs
+* Help from my instructor, classmates and TAs
 
 ## Use:
 
