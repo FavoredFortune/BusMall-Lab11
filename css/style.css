@@ -1,0 +1,89 @@
+body {
+  background-color: rgb(31, 27, 60);
+  color: white;
+  font-family: 'Josefin', sans-serif;
+  font-size: 14px;
+  line-height: 1.5rem;
+  margin: 5px;
+  padding: 5px;
+  border: 5px;
+  font-size: 100%;
+  vertical-align: middle;
+}
+
+li img {
+  display: inline-block;
+  width: 150px;
+  margin: 10px;
+  padding: 5px;
+  border: 2px grey;
+}
+h1{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
+  color: white;
+  background: grey;
+}
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  color: white;
+}
+section.spacer{
+  height: 60px;
+  line-height: 3rem;
+}
+
+button{
+  background:slateblue;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  color: white;
+  padding:24px;
+
+}
+
+table.product-data {
+  empty-cells: hide;
+  font-family: 'Montserrat', sans-serif;
+  max-width: 100%;
+  border-collapse: separate;
+
+}
+
+td,tr {
+  padding: 15px;
+  margin: 10px;
+  border: .1px solid rgb(31, 27, 60);
+}
+tr{
+  background: white;
+  color: grey;
+}
+table tr:nth-child(even) {
+  background: rgb(31, 27, 60);
+  color: white;
+}
+tr td:first-child{
+  background:grey;
+  color: white;
+}
+
+th {
+	background-color: white;
+  color: rgb(31, 27, 60);
+  border: 1px solid slategray;
+  padding: 10px;
+  margin: 5px;
+  /* empty-cells: hide; */
+}
+
+section.footer {
+  background-color: grey;
+  color:  rgb(31, 27, 60);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  padding: 10px;
+  text-align: center;
+}
+
