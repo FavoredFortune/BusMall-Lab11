@@ -14,24 +14,17 @@ currentRandomNum = [];
 ProductImages.allProducts = [];
 //make a constructor function for all product images
 //-----methods go here so that each product instance inherits all properities
-function ProductImages (imageName,imageSrcFilepath,altNameID){
+function ProductImages (imageName,imageSrcFilepath){
   this.imageName = imageName;
   this.imageSrcFilepath = imageSrcFilepath;
-  this.altNameID = altNameID;
   this.imageTimesClicked = 0;
   //add display counter this.randomImageDisplay
   this.imageTimesShown = 0;
   //add a product properity values for each instant to all products array - this approach leads to less global variables
   ProductImages.allProducts.push(this);
 }
-//Grab 3 different images the first time and increment object instance imageTimesShown
-//access the image element from the DOM
-for (var i = 0; i < 3; i++){
-var liImageElement = document.getElementById('goat-pic');
-liImageElement = document.createElement ('li');
-liImageElement.textContent = ProductImages.imageName.currentRandomNum[i], ProductImages.imageSrcFilepath.currentRandomNum[i];
-olElement.appendChild(liImageElement);
-}
+//access each image element from the DOM
+
 
 //create image element
 
@@ -52,7 +45,7 @@ function randomNumGen(){
 //callback function for the event listener to randomly display a goat image
 
 //invoke the callback on page load to show a random goat
-randomGoat();
+
 
 //create do while loop that when click happens it checks number of total clicks (if less than clickVotes, then generate new random numbers and generate new images) 
 
@@ -60,8 +53,25 @@ randomGoat();
 
 
 //create instances of each product (can store in variables but not doing in demo)
-new Goat('img/cruisin-goat.jpg','Cruising Goat');
-new Goat('img/kissing-goat.jpg','Kissing Goat');
-new Goat('img/sassy-goat.jpg','Sassy Goat');
-new Goat('img/smiling-goat.jpg', 'Smiling Goat');
-new Goat ('img/sweater-goat.jpg','Sweater Goat');
+new ProductImages('bag','img/bag.jpg');
+new ProductImages('banana', 'img/banana.jpg');
+new ProductImages('bathroom', 'img/bathroom.jpg');
+new ProductImages('boots', 'img/boots.jpg');
+new ProductImages('breakfast', 'img/breakfast.jpg');
+new ProductImages('bubblegum', 'img/bubblegum.jpg');
+new ProductImages('chaircthulhu', 'img/chaircthulhu.jpg');
+new ProductImages('cthulhu', 'img/cthulhu.jpg');
+new ProductImages('dog-duck', 'img/dog-duck.jpg');
+new ProductImages('dragon', 'img/dragon.jpg');
+new ProductImages('pen', 'img/pen.jpg');
+new ProductImages('pet-sweep', 'img/pet-sweep.jpg');
+new ProductImages('scissors', 'img/scissors.jpg');
+new ProductImages('shark', 'img/shark.jpg');
+new ProductImages('sweep', 'img/sweep.jpg');
+new ProductImages('tauntaun', 'img/tauntaun.jpg');
+new ProductImages('unicorn', 'img/unicorn.jpg');
+new ProductImages('usb', 'img/usb.jpg');
+new ProductImages('water-can', 'img/water-can.jpg');
+new ProductImages('wine-glass', 'img/wine-glass.jpg');
+
+
