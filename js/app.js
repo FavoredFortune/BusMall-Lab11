@@ -25,22 +25,29 @@ function ProductImages (imageName,imageSrcFilepath,altNameID){
   ProductImages.allProducts.push(this);
 }
 //Grab 3 different images the first time and increment object instance imageTimesShown
+//access the image element from the DOM
+for (var i = 0; i < 3; i++){
+var liImageElement = document.getElementById('goat-pic');
+liImageElement = document.createElement ('li');
+liImageElement.textContent = ProductImages.imageName.currentRandomNum[i], ProductImages.imageSrcFilepath.currentRandomNum[i];
+olElement.appendChild(liImageElement);
+}
+
+//create image element
 
 //render the images in the DOM that are random and not a repeat of previous image or each other
 
 //event listener on the page for any image click
 
-imgElement.addEventListener('click',function randomNu
-
-
+imageElement.addEventListener('click',randomNumGen);
 
 //create random number generator for array and to use in the below method
 
-function randomGoat(){
-  //random number generator  to return a length of the Goat.allGoats array
-  var randomIndex = Math.floor(Math.random() * Goat.allGoats.length);
-  //use random number to display a goat at that random index
-  imgElement.src = Goat.allGoats [randomIndex].srcFilepath;
+function randomNumGen(){
+  //random number generator  to return a length of the ProductImage array
+ 
+  //use random number to display a product at that random index
+  imgElement.src = Goat.allGoats[randomIndex].srcFilepath;
 }
 //callback function for the event listener to randomly display a goat image
 
