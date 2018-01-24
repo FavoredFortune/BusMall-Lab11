@@ -24,6 +24,8 @@ A few reasons:
 * GitHub
 * Jon Duckett HTML & CSS book
 * Jon Duckett JavaScript & jQuery book
+* Chart.js library found here: https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js
+* For chart colors I used this table from W3Schools.com: https://www.w3schools.com/colors/colors_picker.asp and then converted the first 20 hex values into a concatenated string to insert into my color variable for the chart. This concatenation table may be found in my Google Sheets here: https://docs.google.com/spreadsheets/d/1Zdc0kBx3nAf9SgA8m5Pc7J4kkXhC3bwHgY7aCaghi2I/edit?usp=sharing
 * Help from my instructor, classmates and TAs
 
 ## Use:
