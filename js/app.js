@@ -102,7 +102,7 @@ function manageClick(event){
       console.log (ProductImages.totalClicks);
     }
   }
-  if (ProductImages.totalClicks > 6){
+  if (ProductImages.totalClicks > 25){
     sectionElement.removeEventListener('click', manageClick);
     alert('Thanks for voting your results are below.');
     updateVotes();
