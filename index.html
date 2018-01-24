@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Macondo|Merriweather|Montserrat|Questrial" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 </head>
 <html>
     <body>
@@ -19,27 +19,28 @@
       <p>We greatly appreciate your time in helping BusMall be a success. See you on the bus!</p>
       <br>
     </section>
-    <section>
+    <section id = "products-for-vote">
       <br>
       <h2>Thanks for clicking on your preffered product</h2>
-      <ol class="product-images">
-        <li id="product1"></li>
-        <li id="product2"></li>
-        <li id="product3"></li>
-      </ol>
+      <ul id="product-images">
+        <li><img id ="product1" src="" alt=""></li>
+        <li><img id ="product2" src="" alt=""></li>
+        <li><img id ="product3" src="" alt=""></li>
+     </ul>
     </section>
     <section>
       <br>
       <h1>Your vote results</h1>
       <table id = "product-data"> </table>
     </section>
+    <section>
+      <canvas id="product-vote-chart" height="300px" width="600px"></canvas>
+    </section>
     <section class="spacer"></section>
     <section class="footer">
       <p><i>Please note that all content is property of BusMall, LLC</i></p>
       <p>&copy; Copyright 2018 </p>
     </section>
-
     <script type ="text/javascript" src="js/app.js"></script>
-
     </body>
 </html>
