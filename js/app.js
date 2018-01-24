@@ -128,7 +128,6 @@ function updateVotes(){
 }
 
 //Nixed results table in favor of today's new requirement - a chart
-
 //function to create and populate chart
 function renderChart(){
   var context = document.getElementById('product-vote-chart').getContext('2d');
