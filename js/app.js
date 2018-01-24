@@ -102,7 +102,7 @@ function manageClick(event){
       console.log (ProductImages.totalClicks);
     }
   }
-  if (ProductImages.totalClicks > 6){
+  if (ProductImages.totalClicks > 25){
     sectionElement.removeEventListener('click', manageClick);
     alert('Thanks for voting your results are below.');
     updateVotes();
@@ -128,10 +128,7 @@ function updateVotes(){
 //   var tableRowElement = document.createElement('tr');
 //   var tableDataElement = document.createElement('td');
 
-//   //rows labels of each product name
-
-
-//   //create data cell for votes  and times shown and %
+  //create data cell for votes  and times shown and %
 
 //   for(var i in ProductImages.allProducts){
 //     tableDataElement = document.createElement('tc');
