@@ -200,6 +200,7 @@ function updateVotes(){
 function renderChart(){
   var context = document.getElementById('product-vote-chart').getContext('2d');
 
+  //colors don't seem to work, tried background color as the element and fill color, but keeping here because it doesn't break anything and it might work, somehow, someday
   var chartColors = [ '#ff0000', '#ff4000', '#ff8000', '#ffbf00', '#ffff00', '#bfff00', '#80ff00', '#40ff00', '#00ff00', '#00ff40', '#00ff80', '#00ffbf', '#00ffff', '#00bfff', '#0080ff', '#0040ff', '#0000ff', '#4000ff', '#8000ff', '#bf00ff'];
 
   var productVoteChart = new Chart(context, {
