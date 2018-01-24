@@ -11,8 +11,8 @@ body {
   vertical-align: middle;
 }
 
-li img {
-  display: inline-block;
+li {
+  display: inline;
   width: 150px;
   margin: 10px;
   padding: 5px;
