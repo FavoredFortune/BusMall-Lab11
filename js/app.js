@@ -23,7 +23,7 @@ var productNames = [];
 
 //declare a variable that is assigned the maximum number of votes/clicks per user
 
-var maxVote = 10;
+var maxVote = 24;
 
 //make a constructor function for all product images
 //-----methods go here so that each product instance inherits all properities
