@@ -23,6 +23,10 @@ var allProducts = document.getElementById('product-data');
 
 var productVotes = [];
 
+//store product names so they can be used as labels in the chart
+
+var productNames = [];
+
 
 //make a constructor function for all product images
 //-----methods go here so that each product instance inherits all properities
@@ -34,6 +38,7 @@ function ProductImages (imageName,imageSrcFilepath){
   this.imageTimesShown = 0;
   //add a product properity values for each instant to all products array - this approach leads to less global variables
   ProductImages.allProducts.push(this);
+  productNames.push(this.imageName);
 }
 //access each image element from the DOM
 var product1Element = document.getElementById('product1');
@@ -102,12 +107,13 @@ function manageClick(event){
       console.log (ProductImages.totalClicks);
     }
   }
-  if (ProductImages.totalClicks > 25){
+  if (ProductImages.totalClicks > 8){
     sectionElement.removeEventListener('click', manageClick);
     alert('Thanks for voting your results are below.');
     updateVotes();
     // makeHeaderRow();
     // renderTable();
+    renderChart();
   } else {
     randomProductGen();
   }
@@ -187,6 +193,34 @@ function updateVotes(){
 
 //Nixing table in favor of today's new requirement - a chart
 
+//function to create and populate chart
+function renderChart(){
+  var context = document.getElementById('product-vote-chart').getContext('2d');
+
+  //colors don't seem to work, tried background color as the element and fill color, but keeping here because it doesn't break anything and it might work, somehow, someday
+  var chartColors = [ '#ff0000', '#ff4000', '#ff8000', '#ffbf00', '#ffff00', '#bfff00', '#80ff00', '#40ff00', '#00ff00', '#00ff40', '#00ff80', '#00ffbf', '#00ffff', '#00bfff', '#0080ff', '#0040ff', '#0000ff', '#4000ff', '#8000ff', '#bf00ff'];
+
+  var productVoteChart = new Chart(context, {
+    type:'bar',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: 'Votes Per Product by User',
+        data: productVotes,
+        fillColor: chartColors,
+      }]
+    },
+    options: {
+      scales: {
+        yAxes:[{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
 
 //create instances of each product (can store in variables but not doing in demo)
 new ProductImages('bag','img/bag.jpg');
