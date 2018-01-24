@@ -128,9 +128,6 @@ function renderTable(){
   var tableRowElement = document.createElement('tr');
   var tableDataElement = document.createElement('td');
 
-  //rows labels of each product name
-
-
   //create data cell for votes  and times shown and %
 
   for(var i in ProductImages.allProducts){
