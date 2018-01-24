@@ -40,15 +40,7 @@ var product1Element = document.getElementById('product1');
 var product2Element = document.getElementById('product2');
 var product3Element = document.getElementById('product3');
 
-//create image element
-
-//render the images in the DOM that are random and not a repeat of previous image or each other
-
-//event listener on the page for any image click
-
-sectionElement.addEventListener('click',randomProductGen);
-
-//create random number generator for array and to use in the below method
+//create random image generator for array and to use in the below functions
 
 function randomProductGen(){
   //random number generator  to return a length of the ProductImage array
@@ -56,14 +48,21 @@ function randomProductGen(){
   var randomProduct2 = Math.floor(Math.random() * ProductImages.allProducts.length);
   var randomProduct3 = Math.floor(Math.random() * ProductImages.allProducts.length);
 
+  console.log ('before',randomProduct1, randomProduct2, randomProduct3);
+  console.log ('before',ProductImages.lastShown);
+
   //create a while loop to make sure that no images displayed in any set of 3 are the same and none of them are the same images as last time
   while (randomProduct1 === randomProduct2 || randomProduct1 === randomProduct3 || randomProduct2 === randomProduct3 || ProductImages.lastShown.includes(randomProduct1) || ProductImages.lastShown.includes(randomProduct2) || ProductImages.lastShown.includes(randomProduct3)) {
     console.log ('Duplicate seen');
+
     randomProduct1 = Math.floor(Math.random() * ProductImages.allProducts.length);
 
     randomProduct2 = Math.floor(Math.random() * ProductImages.allProducts.length);
- 
+
     randomProduct3 = Math.floor(Math.random() * ProductImages.allProducts.length);
+
+    console.log (randomProduct1, randomProduct2, randomProduct3);
+    console.log (ProductImages.lastShown);
   }
 
   //use random number to show a product three times
@@ -91,17 +90,23 @@ function randomProductGen(){
 //create a function that manages clicks for products themselves
 
 function manageClick(event){
-  //total click votes tracking
-  ProductImages.totalClicks ++;
+
   //count total clicks on a specific product image instance
   for(var i in ProductImages.allProducts){
     if(event.target.alt === ProductImages.allProducts[i].imageName){
-      ProductImages.allProducts[i].productVotes ++;
+      ProductImages.allProducts[i].imageTimesClicked ++;
+      console.log(ProductImages.allProducts[i].imageTimesClicked);
+
+      //total click votes tracking
+      ProductImages.totalClicks ++;
+      console.log (ProductImages.totalClicks);
     }
   }
-  if (ProductImages.totalClicks < 25){
+  if (ProductImages.totalClicks > 6){
     sectionElement.removeEventListener('click', manageClick);
+    alert('Thanks for voting your results are below.');
     updateVotes();
+    makeHeaderRow();
     renderTable();
   } else {
     randomProductGen();
@@ -117,39 +122,53 @@ function updateVotes(){
 
 //create the table market research has request that shows # of votes, # times shown and % of votes/shown for each product
 
-ProductImages.prototype.renderTable = function(){
+function renderTable(){
 
   //header for table of results about product votes
   var tableRowElement = document.createElement('tr');
   var tableDataElement = document.createElement('td');
-  
+
   //rows labels of each product name
-  tableRowElement.appendChild(tableDataElement);
-  tableDataElement.textContent = this.imageName;
+
 
   //create data cell for votes  and times shown and %
-  for(var i in ProductImages.allProducts){
-    tableDataElement = document.createElement('td');
-    tableDataElement.textContent = this.imageTimesClicked[i];
-    tableRowElement.appendChild(tableDataElement);
-  }
 
   for(var i in ProductImages.allProducts){
-    tableDataElement = document.createElement('td');
-    tableDataElement.textContent = this.imageTimesShown[i];
-    tableRowElement.appendChild(tableDataElement);
-  }
+    tableDataElement = document.createElement('tc');
+    tableDataElement.textContent = ProductImages.allProducts[i].imageName;
+    tableDataElement.appendChild(tableRowElement);
+    allProducts.appendChild(tableRowElement);
 
-  for(var i in ProductImages.allProducts){
     tableDataElement = document.createElement('td');
-    tableDataElement.textContent = Math.floor(this.imageTimesClicked/this.imageTimesShown[i]);
-    tableRowElement.appendChild(tableDataElement);
+    tableDataElement.textContent = ProductImages.allProducts[i].imageTimesClicked;
+    tableDataElement.appendChild(tableRowElement);
+    allProducts.appendChild(tableRowElement);
+
+    tableDataElement = document.createElement('td');
+    tableDataElement.textContent = ProductImages.allProducts[i].imageTimesShown;
+    tableDataElement.appendChild(tableRowElement);
+    allProducts.appendChild(tableRowElement);
+
+    if(ProductImages.allProducts[i].imageTimesShown >= 1 && ProductImages.allProducts[i].imageTimesClicked > 0){
+      var a = ProductImages.allProducts[i].imageTimesClicked;
+      var b = ProductImages.allProducts[i].imageTimesShown;
+      var voteRate = Math.round(100 * (a / b) ) * 100 / 100;
+      tableRowElement = document.createElement('td');
+      tableRowElement.textContent = voteRate + ' %';
+      tableDataElement.appendChild(tableRowElement);
+    } else{
+      tableRowElement = document.createElement('td');
+      tableRowElement.textContent = 'N/A';
+      tableDataElement.appendChild(tableRowElement);
+    }
+    allProducts.appendChild(tableRowElement);
   }
-  allProducts.appendChild(tableRowElement);
 }
 
 function makeHeaderRow(){
   var productName = document.createElement ('td');
+  var tableRowElement = document.createElement('tr');
+
   productName.textContent = 'Product';
   tableRowElement.appendChild(productName);
 
@@ -191,9 +210,9 @@ new ProductImages('usb', 'img/usb.gif');
 new ProductImages('water-can', 'img/water-can.jpg');
 new ProductImages('wine-glass', 'img/wine-glass.jpg');
 
-//create event listener
+//create event
 
-sectionElement.addEventListener('click',manageClick);
+sectionElement.addEventListener('click', manageClick);
 
 //render the three images on the page
 
