@@ -106,8 +106,8 @@ function manageClick(event){
     sectionElement.removeEventListener('click', manageClick);
     alert('Thanks for voting your results are below.');
     updateVotes();
-    makeHeaderRow();
-    renderTable();
+    // makeHeaderRow();
+    // renderTable();
   } else {
     randomProductGen();
   }
@@ -122,71 +122,74 @@ function updateVotes(){
 
 //create the table market research has request that shows # of votes, # times shown and % of votes/shown for each product
 
-function renderTable(){
+// function renderTable(){
 
-  //header for table of results about product votes
-  var tableRowElement = document.createElement('tr');
-  var tableDataElement = document.createElement('td');
+//   //header for table of results about product votes
+//   var tableRowElement = document.createElement('tr');
+//   var tableDataElement = document.createElement('td');
 
-  //rows labels of each product name
-
-
-  //create data cell for votes  and times shown and %
-
-  for(var i in ProductImages.allProducts){
-    tableDataElement = document.createElement('tc');
-    tableDataElement.textContent = ProductImages.allProducts[i].imageName;
-    tableDataElement.appendChild(tableRowElement);
-    allProducts.appendChild(tableRowElement);
-
-    tableDataElement = document.createElement('td');
-    tableDataElement.textContent = ProductImages.allProducts[i].imageTimesClicked;
-    tableDataElement.appendChild(tableRowElement);
-    allProducts.appendChild(tableRowElement);
-
-    tableDataElement = document.createElement('td');
-    tableDataElement.textContent = ProductImages.allProducts[i].imageTimesShown;
-    tableDataElement.appendChild(tableRowElement);
-    allProducts.appendChild(tableRowElement);
-
-    if(ProductImages.allProducts[i].imageTimesShown >= 1 && ProductImages.allProducts[i].imageTimesClicked > 0){
-      var a = ProductImages.allProducts[i].imageTimesClicked;
-      var b = ProductImages.allProducts[i].imageTimesShown;
-      var voteRate = Math.round(100 * (a / b) ) * 100 / 100;
-      tableRowElement = document.createElement('td');
-      tableRowElement.textContent = voteRate + ' %';
-      tableDataElement.appendChild(tableRowElement);
-    } else{
-      tableRowElement = document.createElement('td');
-      tableRowElement.textContent = 'N/A';
-      tableDataElement.appendChild(tableRowElement);
-    }
-    allProducts.appendChild(tableRowElement);
-  }
-}
-
-function makeHeaderRow(){
-  var productName = document.createElement ('td');
-  var tableRowElement = document.createElement('tr');
-
-  productName.textContent = 'Product';
-  tableRowElement.appendChild(productName);
-
-  var timesVoted = document.createElement ('td');
-  timesVoted.textContent = '# Votes';
-  tableRowElement.appendChild(timesVoted);
-
-  var timesShown = document.createElement ('td');
-  timesShown.textContent = '# Times Shown';
-  tableRowElement.appendChild(timesShown);
-
-  var preferenceRate = document.createElement ('td');
-  preferenceRate.textContent = '% Chosen vs. Shown';
-  tableRowElement.appendChild(preferenceRate);
+//   //rows labels of each product name
 
 
-  allProducts.appendChild(tableRowElement);
-}
+//   //create data cell for votes  and times shown and %
+
+//   for(var i in ProductImages.allProducts){
+//     tableDataElement = document.createElement('tc');
+//     tableDataElement.textContent = ProductImages.allProducts[i].imageName;
+//     tableDataElement.appendChild(tableRowElement);
+//     allProducts.appendChild(tableRowElement);
+
+//     tableDataElement = document.createElement('td');
+//     tableDataElement.textContent = ProductImages.allProducts[i].imageTimesClicked;
+//     tableDataElement.appendChild(tableRowElement);
+//     allProducts.appendChild(tableRowElement);
+
+//     tableDataElement = document.createElement('td');
+//     tableDataElement.textContent = ProductImages.allProducts[i].imageTimesShown;
+//     tableDataElement.appendChild(tableRowElement);
+//     allProducts.appendChild(tableRowElement);
+
+//     if(ProductImages.allProducts[i].imageTimesShown >= 1 && ProductImages.allProducts[i].imageTimesClicked > 0){
+//       var a = ProductImages.allProducts[i].imageTimesClicked;
+//       var b = ProductImages.allProducts[i].imageTimesShown;
+//       var voteRate = Math.round(100 * (a / b) ) * 100 / 100;
+//       tableRowElement = document.createElement('td');
+//       tableRowElement.textContent = voteRate + ' %';
+//       tableDataElement.appendChild(tableRowElement);
+//     } else{
+//       tableRowElement = document.createElement('td');
+//       tableRowElement.textContent = 'N/A';
+//       tableDataElement.appendChild(tableRowElement);
+//     }
+//     allProducts.appendChild(tableRowElement);
+//   }
+// }
+
+// function makeHeaderRow(){
+//   var productName = document.createElement ('td');
+//   var tableRowElement = document.createElement('tr');
+
+//   productName.textContent = 'Product';
+//   tableRowElement.appendChild(productName);
+
+//   var timesVoted = document.createElement ('td');
+//   timesVoted.textContent = '# Votes';
+//   tableRowElement.appendChild(timesVoted);
+
+//   var timesShown = document.createElement ('td');
+//   timesShown.textContent = '# Times Shown';
+//   tableRowElement.appendChild(timesShown);
+
+//   var preferenceRate = document.createElement ('td');
+//   preferenceRate.textContent = '% Chosen vs. Shown';
+//   tableRowElement.appendChild(preferenceRate);
+
+
+//   allProducts.appendChild(tableRowElement);
+// }
+
+//Nixing table in favor of today's new requirement - a chart
+
 
 //create instances of each product (can store in variables but not doing in demo)
 new ProductImages('bag','img/bag.jpg');
