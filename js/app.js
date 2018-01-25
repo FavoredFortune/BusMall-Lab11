@@ -136,20 +136,17 @@ function renderChart(){
   var context = document.getElementById('product-vote-chart').getContext('2d');
 
   //changing from my fun rainbow colors as referenced in readme.md to just two values from the same source to better differentiate votes vs displays/shows
-  var chartColors1 = ['#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040','#404040',];
-
-  var chartColors2 = ['#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff','#0040ff',];
 
   var voteChartData = {
     label: 'Votes per Product (cumulative)',
     data: productVotes,
-    backgroundColor: chartColors1,
+    backgroundColor: '#404040',
   };
 
   var shownChartData = {
     label: 'Times shown per product (cumulative)',
     data: productShown,
-    backgroundColor: chartColors2,
+    backgroundColor: '#0040ff',
   };
 
   var productInfo = {
@@ -185,28 +182,30 @@ function renderTable(){
   var tableDataElement = document.createElement('td');
 
   //create row for each product that has data cells for votes, times shown and % click rate
-  for(var i = 0; i < ProductImages.allProducts.length; i++){
+  for(var i = 0; i < productNames.length; i++){
     tableRowElement = document.createElement('tr');
-    tableDataElement = document.createElement('td');
-    tableDataElement.textContent = ProductImages.productNames[i];
 
-    console.log (ProductImages.allProducts[i].imageName);
+    tableDataElement = document.createElement('td');
+    tableDataElement.textContent = productNames[i];
+
     tableRowElement.appendChild(tableDataElement);
     productTable.appendChild(tableRowElement);
 
     tableDataElement = document.createElement('td');
-    tableDataElement.textContent = ProductImages.productVotes[i];
+    tableDataElement.textContent = productVotes[i];
     tableRowElement.appendChild(tableDataElement);
+    productTable.appendChild(tableRowElement);
 
     tableDataElement = document.createElement('td');
-    tableDataElement.textContent = ProductImages.productShown[i];
+    tableDataElement.textContent = productShown[i];
     tableRowElement.appendChild(tableDataElement);
+    productTable.appendChild(tableRowElement);
 
-    if(ProductImages.ProductImages.productShown[i] >= 1 && ProductImages.productVotes[i] > 0){
+    if(productShown[i] >= 1 && productVotes[i] > 0){
 
       //calculate preference rate by dividing the number of times an item is clicked by the number of times the item is shown/displayed
-      var a = ProductImages.productVotes[i];
-      var b = ProductImages.productShown[i];
+      var a = productVotes[i];
+      var b = productShown[i];
       var voteRate = Math.round(100 * (a / b) ) * 100 / 100;
       tableRowElement = document.createElement('td');
       tableRowElement.textContent = voteRate + ' %';
@@ -217,25 +216,25 @@ function renderTable(){
     } else{
       tableRowElement = document.createElement('tr');
       tableDataElement = document.createElement('td');
-      tableDataElement.textContent = ProductImages.productNames[i];
+      tableDataElement.textContent = productNames[i];
       tableRowElement.appendChild(tableDataElement);
       productTable.appendChild(tableRowElement);
 
 
       tableDataElement = document.createElement('td');
-      tableDataElement.textContent = ProductImages.productVotes[i];
+      tableDataElement.textContent = productVotes[i];
       tableRowElement.appendChild(tableDataElement);
 
       tableDataElement = document.createElement('td');
-      tableDataElement.textContent = ProductImages.productShown[i];
-      tableDataElement.appendChild(tableDataElement);
-      tableRowElement = document.createElement('td');
-      tableRowElement.textContent = 'N/A';
+      tableDataElement.textContent = productShown[i];
+      tableRowElement.appendChild(tableDataElement);
+
+      tableDataElement = document.createElement('td');
+      tableDataElement.textContent = 'N/A';
       tableRowElement.appendChild(tableDataElement);
 
       productTable.appendChild(tableRowElement);
     }
-    productTable.appendChild(tableRowElement);
   }
 }
 
