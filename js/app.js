@@ -124,7 +124,7 @@ function manageClick(event){
     localStorage.setItem('totalProductVotes',JSON.stringify(productVotes));
     localStorage.setItem('totalProductShowns',JSON.stringify(productShown));
     console.log (localStorage.totalProductVotes);
-    
+
     // var productVotes = localStorage.totalProductVotes
   } else {
 
@@ -147,29 +147,44 @@ function updateVotes(){
 function renderChart(){
   var context = document.getElementById('product-vote-chart').getContext('2d');
 
-  //colors don't seem to work, tried background color as the element and fill color, but keeping here because it doesn't break anything and it might work, somehow, someday
-  var chartColors = ['#ff0000', '#ff4000', '#ff8000', '#ffbf00', '#ffff00', '#bfff00', '#80ff00', '#40ff00', '#00ff00', '#00ff40', '#00ff80', '#00ffbf', '#00ffff', '#00bfff', '#0080ff', '#0040ff', '#0000ff', '#4000ff', '#8000ff', '#bf00ff'];
+  //changing from my fun rainbow colors as referenced in readme.md to just two values from the same source to better differentiate votes vs displays/shows
+  var chartColors1 = ['#404040'];
 
-  var productVoteChart = new Chart(context, {
-    type:'bar',
-    data: {
-      labels: productNames,
-      datasets: [{
-        label: 'Votes Per Product by User',
-        data: productVotes,
-        backgroundColor: chartColors,
+  var chartColors2 = ['#0040ff'];
+
+  var voteChartData = {
+    label: 'Votes per Product (cumulative)',
+    data: productVotes,
+    backgroundColor: chartColors1,
+  };
+
+  var shownChartData = {
+    label: 'Times shown per product (cumulative)',
+    data: productShown,
+    backgroundColor: chartColors2,
+  };
+
+  var productInfo = {
+    labels: productNames,
+    datasets:[voteChartData,shownChartData]
+  };
+
+  var chartOptions = {
+    scales: {
+      yAxes:[{
+        ticks: {
+          beginAtZero: true
+        }
       }]
-    },
-    options: {
-      scales: {
-        yAxes:[{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
-      }
     }
+  };
+
+  var productResultsChart = new Chart(context, {
+    type:'bar',
+    data: productInfo,
+    options: chartOptions,
   });
+  
 }
 
 //generate images

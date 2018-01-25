@@ -10,24 +10,31 @@ body {
   font-size: 100%;
   vertical-align: middle;
 }
-
+p {
+  margin: 10px;
+}
 li {
   display: inline;
-  width: 150px;
-  margin: 10px;
+  margin: 60px,15px,30px,15px;
   padding: 5px;
   border: 2px grey;
 }
+li img {
+  margin: 60px,15px,30px,15px;
+}
+
 h1{
   font-family: 'Montserrat', sans-serif;
   font-size: 22px;
   color: white;
   background: grey;
+  margin-top: 20px;
 }
 h2 {
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   color: white;
+  margin-top: 20px;
 }
 section.spacer{
   height: 60px;
