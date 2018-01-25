@@ -15,7 +15,11 @@ var sectionElement = document.getElementById('products-for-vote');
 
 //assign votes per product into an empty array for showing total product votes in the chart and/or calculating % vote vs. displayed in the table
 
-var productVotes = [];
+var productVotes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+//assign display values per product to an empty array for showing total product show in the chart and or calculateing # vote vs displayed in the chart
+
+var productShown = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 //assign product names into an empty array so they can be used as labels in the chart
 
@@ -23,7 +27,7 @@ var productNames = [];
 
 //declare a variable that is assigned the maximum number of votes/clicks per user
 
-var maxVote = 24;
+var maxVote = 8;
 
 //make a constructor function for all product images
 //-----methods go here so that each product instance inherits all properities
@@ -44,13 +48,14 @@ var product3Element = document.getElementById('product3');
 
 //create random image generator for array and to use in the below functions
 function randomProductGen(){
+
   //random number generator  to return a length of the ProductImage array
   var randomProduct1 = Math.floor(Math.random() * ProductImages.allProducts.length);
   var randomProduct2 = Math.floor(Math.random() * ProductImages.allProducts.length);
   var randomProduct3 = Math.floor(Math.random() * ProductImages.allProducts.length);
 
-  console.log ('before',randomProduct1, randomProduct2, randomProduct3);
-  console.log ('before',ProductImages.lastShown);
+  // console.log ('before',randomProduct1, randomProduct2, randomProduct3);
+  // console.log ('before',ProductImages.lastShown);
 
   //create a while loop to make sure that no images displayed in any set of 3 are the same and none of them are the same images as last time
   while (randomProduct1 === randomProduct2
@@ -59,7 +64,7 @@ function randomProductGen(){
     || ProductImages.lastShown.includes(randomProduct1)
     || ProductImages.lastShown.includes(randomProduct2)
     || ProductImages.lastShown.includes(randomProduct3)) {
-    console.log ('Duplicate seen');
+    // console.log ('Duplicate seen');
 
     randomProduct1 = Math.floor(Math.random() * ProductImages.allProducts.length);
 
@@ -67,8 +72,8 @@ function randomProductGen(){
 
     randomProduct3 = Math.floor(Math.random() * ProductImages.allProducts.length);
 
-    console.log (randomProduct1, randomProduct2, randomProduct3);
-    console.log (ProductImages.lastShown);
+    // console.log (randomProduct1, randomProduct2, randomProduct3);
+    // console.log (ProductImages.lastShown);
   }
 
   //use random number to show a product three times
@@ -103,11 +108,11 @@ function manageClick(event){
     // increment times clicked for an product image object if it was clicked on the page
     if(event.target.alt === ProductImages.allProducts[i].imageName){
       ProductImages.allProducts[i].imageTimesClicked ++;
-      console.log(ProductImages.allProducts[i].imageTimesClicked);
+      // console.log(ProductImages.allProducts[i].imageTimesClicked);
 
       //total click votes tracking
       ProductImages.totalClicks ++;
-      console.log (ProductImages.totalClicks);
+      // console.log (ProductImages.totalClicks);
     }
   }
   if (ProductImages.totalClicks > maxVote){
@@ -115,7 +120,16 @@ function manageClick(event){
     alert('Thanks for voting. Your results are below.');
     updateVotes();
     renderChart();
+    //add all productVote array values to local storage after vote is complete
+    localStorage.setItem('totalProductVotes',JSON.stringify(productVotes));
+    localStorage.setItem('totalProductShowns',JSON.stringify(productShown));
+    console.log (localStorage.totalProductVotes);
+    
+    // var productVotes = localStorage.totalProductVotes
   } else {
+
+    //turn those stored values back into array index items by parsing the localStorage string
+    //set the revised array to the initial value for the next run through voting
     randomProductGen();
   }
 }
@@ -123,7 +137,8 @@ function manageClick(event){
 //update # of votes for each product instance
 function updateVotes(){
   for( var i in ProductImages.allProducts){
-    productVotes[i] = ProductImages.allProducts[i].imageTimesClicked;
+    productVotes[i] += ProductImages.allProducts[i].imageTimesClicked;
+    productShown[i] += ProductImages.allProducts[i].imageTimesShown;
   }
 }
 
@@ -157,7 +172,7 @@ function renderChart(){
   });
 }
 
-//create instances of each product (can store in variables but not doing in demo)
+//generate images
 new ProductImages('bag','img/bag.jpg');
 new ProductImages('banana', 'img/banana.jpg');
 new ProductImages('bathroom', 'img/bathroom.jpg');
@@ -179,6 +194,22 @@ new ProductImages('usb', 'img/usb.gif');
 new ProductImages('water-can', 'img/water-can.jpg');
 new ProductImages('wine-glass', 'img/wine-glass.jpg');
 
+//create instances of each product (can store in variables but not doing in demo)
+
+//   randomProductGen();
+//   console.log(ProductImages.allProducts);
+
+//   localStorage.setItem('allProductInstances', JSON.stringify(ProductImages.allProducts));
+//   console.log(localStorage.allProductInstances);
+
+// else{
+//   localStorage.getItem(JSON.parse(localStorage.allProductInstances));
+// }
+//reset the productVote array start values to the final tally of this round of voting from the local storage
+if(localStorage.totalProductShowns){
+  productVotes = JSON.parse(localStorage.getItem('totalProductVotes'));
+  productShown = JSON.parse(localStorage.getItem('totalProductShowns'));
+}
 //create event
 sectionElement.addEventListener('click', manageClick);
 
