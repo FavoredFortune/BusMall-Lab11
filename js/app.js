@@ -186,50 +186,54 @@ function renderTable(){
 
   //create row for each product that has data cells for votes, times shown and % click rate
   for(var i = 0; i < ProductImages.allProducts.length; i++){
+    tableRowElement = document.createElement('tr');
+    tableDataElement = document.createElement('td');
+    tableDataElement.textContent = ProductImages.productNames[i];
 
-    if(ProductImages.allProducts[i].imageTimesShown >= 1 && ProductImages.allProducts[i].imageTimesClicked > 0){
+    console.log (ProductImages.allProducts[i].imageName);
+    tableRowElement.appendChild(tableDataElement);
+    productTable.appendChild(tableRowElement);
 
-      tableRowElement = document.createElement('tr');
-      tableDataElement = document.createElement('td');
-      tableDataElement.textContent = ProductImages.allProducts[i].imageName;
-      console.log (ProductImages.allProducts[i].imageName);
-      tableDataElement.appendChild(tableRowElement);
-      productTable.appendChild(tableRowElement);
+    tableDataElement = document.createElement('td');
+    tableDataElement.textContent = ProductImages.productVotes[i];
+    tableRowElement.appendChild(tableDataElement);
 
+    tableDataElement = document.createElement('td');
+    tableDataElement.textContent = ProductImages.productShown[i];
+    tableRowElement.appendChild(tableDataElement);
 
-      tableDataElement = document.createElement('td');
-      tableDataElement.textContent = ProductImages.allProducts[i].imageTimesClicked;
-      tableDataElement.appendChild(tableRowElement);
-
-      tableDataElement = document.createElement('td');
-      tableDataElement.textContent = ProductImages.allProducts[i].imageTimesShown;
-      tableDataElement.appendChild(tableRowElement);
+    if(ProductImages.ProductImages.productShown[i] >= 1 && ProductImages.productVotes[i] > 0){
 
       //calculate preference rate by dividing the number of times an item is clicked by the number of times the item is shown/displayed
-      var a = ProductImages.allProducts[i].imageTimesClicked;
-      var b = ProductImages.allProducts[i].imageTimesShown;
+      var a = ProductImages.productVotes[i];
+      var b = ProductImages.productShown[i];
       var voteRate = Math.round(100 * (a / b) ) * 100 / 100;
       tableRowElement = document.createElement('td');
       tableRowElement.textContent = voteRate + ' %';
-      tableDataElement.appendChild(tableRowElement);
+      tableRowElement.appendChild(tableDataElement);
+
+      productTable.appendChild(tableRowElement);
+
     } else{
       tableRowElement = document.createElement('tr');
       tableDataElement = document.createElement('td');
-      tableDataElement.textContent = ProductImages.allProducts[i].imageName;
-      tableDataElement.appendChild(tableRowElement);
+      tableDataElement.textContent = ProductImages.productNames[i];
+      tableRowElement.appendChild(tableDataElement);
       productTable.appendChild(tableRowElement);
 
 
       tableDataElement = document.createElement('td');
-      tableDataElement.textContent = ProductImages.allProducts[i].imageTimesClicked;
-      tableDataElement.appendChild(tableRowElement);
+      tableDataElement.textContent = ProductImages.productVotes[i];
+      tableRowElement.appendChild(tableDataElement);
 
       tableDataElement = document.createElement('td');
-      tableDataElement.textContent = ProductImages.allProducts[i].imageTimesShown;
-      tableDataElement.appendChild(tableRowElement);
+      tableDataElement.textContent = ProductImages.productShown[i];
+      tableDataElement.appendChild(tableDataElement);
       tableRowElement = document.createElement('td');
       tableRowElement.textContent = 'N/A';
-      tableDataElement.appendChild(tableRowElement);
+      tableRowElement.appendChild(tableDataElement);
+
+      productTable.appendChild(tableRowElement);
     }
     productTable.appendChild(tableRowElement);
   }
