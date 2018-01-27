@@ -16,9 +16,8 @@ ProductImages.lastShown = [];
 //access the section element for click events in the DOM
 var sectionElement = document.getElementById('products-for-vote');
 
-//create a new element for click event in the DOM to refresh the page 
-
-var refreshPage = document.getElementById('refresh');
+//create a new element for click event in the DOM to refresh the page DIDN"TWORK
+// var refreshPage = document.getElementById('refresh');
 
 //create table HTML tags itself
 var productTable = document.createElement('table');
@@ -35,7 +34,7 @@ var productShown = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var productNames = [];
 
 //declare a variable that is assigned the maximum number of votes/clicks per user
-var maxVote = 8;
+var maxVote = 25;
 
 //make a constructor function for all product images
 //-----methods go here so that each product instance inherits all properities
@@ -310,8 +309,8 @@ if(localStorage.totalProductShowns){
 //create event listener for clicks on images
 sectionElement.addEventListener('click', manageClick);
 
-//create event listener for click on refresh page button;
-refreshPage.addEventListener('click',location.reload);
+// //create event listener for click on refresh page button; DIDN'T WORK
+// refreshPage.addEventListener('click',location.reload);
 
 //render the three images on the page load
 randomProductGen();
