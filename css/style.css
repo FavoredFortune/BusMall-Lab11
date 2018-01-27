@@ -11,16 +11,21 @@ body {
   vertical-align: middle;
 }
 p {
-  margin: 10px;
+  margin: 30px;
 }
+
+ul{
+  margin: 60px;
+}
+
 li {
   display: inline;
-  margin: 60px,15px,30px,15px;
+  margin: 30px;
   padding: 5px;
   border: 2px grey;
 }
 li img {
-  margin: 60px,15px,30px,15px;
+  margin: 60px,30px,30px,15px;
 }
 
 h1{
@@ -39,23 +44,44 @@ h2 {
   margin-bottom: 40px;
 }
 
-section.spacer{
-  height: 60px;
-  line-height: 3rem;
+.button-custom{
+  background:grey;
+  color: white;
 }
 
-button{
-  background:slateblue;
+.button-reset{
+  background: white;
+  color: grey;
+}
+/* 
+#refresh{
+  background:grey;
   font-family: Georgia, serif;
-  font-size: 16px;
+  font-size: 18px;
   color: white;
   padding:24px;
-
+  margin-bottom: 90px;
+  margin-right: 90px;
+  text-align: center;
 }
-section.chart{
-  margin: 30px;
+
+#refresh:focus{
   background: white;
+  color: gray;
+}
+ */
+
+#chart{
+  margin: 30px;
   font-size: 14px;
+}
+
+canvas{
+  background: white;
+}
+
+table {
+  margin: 30px;
 }
 
 table.product-data {
@@ -63,6 +89,7 @@ table.product-data {
   font-family: 'Montserrat', sans-serif;
   max-width: 100%;
   border-collapse: separate;
+  margin: 30px;
 
 }
 
@@ -97,6 +124,7 @@ section.footer {
   font-size: 12px;
   padding: 10px;
   text-align: center;
+  margin-top: 40px;
 }
 
 

@@ -10,11 +10,20 @@ ProductImages.totalClicks = 0;
 //track previously displayed product for generating new product images
 ProductImages.lastShown = [];
 
-//access the table from DOM
-var productTable = document.getElementById('product-data');
+// //access the table from DOM
+// var productTable = document.getElementById('product-data');
 
 //access the section element for click events in the DOM
 var sectionElement = document.getElementById('products-for-vote');
+
+//create a new element for click event in the DOM to refresh the page 
+
+var refreshPage = document.getElementById('refresh');
+
+//create table HTML tags itself
+var productTable = document.createElement('table');
+var sectionElement2 = document.getElementById ('table');
+
 
 //assign votes per product into an empty array for showing total product votes in the chart and/or calculating % vote vs. displayed in the table - needed values for local storage to start with and then replace
 var productVotes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -133,6 +142,19 @@ function updateVotes(){
 
 //function to create and populate chart
 function renderChart(){
+  //create and display chart title
+  var sectionElement = document.getElementById('chart');
+  var titleElement = document.createElement('h2');
+  titleElement.textContent = 'Number of votes and displays per product';
+  sectionElement.appendChild(titleElement);
+
+  //create canvas in HTML and display canvas background
+  var canvasElement = document.createElement('canvas');
+  canvasElement.id = 'product-vote-chart';
+  canvasElement.height = '300';
+  canvasElement.width = '600';
+  sectionElement.appendChild(canvasElement);
+
   var context = document.getElementById('product-vote-chart').getContext('2d');
 
   //changing from my fun rainbow colors as referenced in readme.md to just two values from the same source to better differentiate votes vs displays/shows
@@ -178,8 +200,9 @@ function renderChart(){
 function renderTable(){
 
   //establish table content rows and cells (data cells)
-  var tableRowElement = document.createElement('tr');
-  var tableDataElement = document.createElement('td');
+  var tableRowElement, tableDataElement;
+  var votes = productVotes;
+  var shown = productShown;
 
   //create row for each product that has data cells for votes, times shown and % click rate
   for(var i = 0; i < productNames.length; i++){
@@ -187,58 +210,47 @@ function renderTable(){
 
     tableDataElement = document.createElement('td');
     tableDataElement.textContent = productNames[i];
-
     tableRowElement.appendChild(tableDataElement);
-    productTable.appendChild(tableRowElement);
+    
 
     tableDataElement = document.createElement('td');
-    tableDataElement.textContent = productVotes[i];
+    tableDataElement.textContent = votes[i];
     tableRowElement.appendChild(tableDataElement);
-    productTable.appendChild(tableRowElement);
+  
 
     tableDataElement = document.createElement('td');
-    tableDataElement.textContent = productShown[i];
+    tableDataElement.textContent = shown[i];
     tableRowElement.appendChild(tableDataElement);
-    productTable.appendChild(tableRowElement);
+  
 
-    if(productShown[i] >= 1 && productVotes[i] > 0){
+    if(productShown[i] > 0){
 
       //calculate preference rate by dividing the number of times an item is clicked by the number of times the item is shown/displayed
-      var a = productVotes[i];
-      var b = productShown[i];
-      var voteRate = Math.round(100 * (a / b) ) * 100 / 100;
-      tableRowElement = document.createElement('td');
-      tableRowElement.textContent = voteRate + ' %';
+      
+      var voteRate = Math.round(100 * (votes[i] / shown[i]) );
+      tableDataElement = document.createElement('td');
+      tableDataElement.textContent = voteRate + ' %';
       tableRowElement.appendChild(tableDataElement);
-
-      productTable.appendChild(tableRowElement);
 
     } else{
-      tableRowElement = document.createElement('tr');
-      tableDataElement = document.createElement('td');
-      tableDataElement.textContent = productNames[i];
-      tableRowElement.appendChild(tableDataElement);
-      productTable.appendChild(tableRowElement);
-
-
-      tableDataElement = document.createElement('td');
-      tableDataElement.textContent = productVotes[i];
-      tableRowElement.appendChild(tableDataElement);
-
-      tableDataElement = document.createElement('td');
-      tableDataElement.textContent = productShown[i];
-      tableRowElement.appendChild(tableDataElement);
 
       tableDataElement = document.createElement('td');
       tableDataElement.textContent = 'N/A';
       tableRowElement.appendChild(tableDataElement);
 
-      productTable.appendChild(tableRowElement);
     }
+    productTable.appendChild(tableRowElement);
   }
+  sectionElement2.appendChild(productTable);
 }
 
 function makeHeaderRow(){
+
+  //create title above table on function invocation
+  var sectionElement = document.getElementById('table');
+  var titleElement = document.createElement('h2');
+  titleElement.textContent = 'Full data per product with preference rate';
+  sectionElement.appendChild(titleElement);
 
   //header for table of results about product votes
   var productName = document.createElement ('td');
@@ -297,6 +309,9 @@ if(localStorage.totalProductShowns){
 }
 //create event listener for clicks on images
 sectionElement.addEventListener('click', manageClick);
+
+//create event listener for click on refresh page button;
+refreshPage.addEventListener('click',location.reload);
 
 //render the three images on the page load
 randomProductGen();
