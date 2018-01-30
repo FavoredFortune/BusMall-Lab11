@@ -76,16 +76,6 @@ function randomProductGen(){
     randomProduct3 = Math.floor(Math.random() * ProductImages.allProducts.length);
   }
 
-  //use random number to show a product three times
-  product1Element.src = ProductImages.allProducts[randomProduct1].imageSrcFilepath;
-  product1Element.alt = ProductImages.allProducts[randomProduct1].imageName;
-
-  product2Element.src = ProductImages.allProducts[randomProduct2].imageSrcFilepath;
-  product2Element.alt = ProductImages.allProducts[randomProduct2].imageName;
-
-  product3Element.src = ProductImages.allProducts[randomProduct3].imageSrcFilepath;
-  product3Element.alt = ProductImages.allProducts[randomProduct3].imageName;
-
   //increment the number of times each product image was shown
   ProductImages.allProducts[randomProduct1].imageTimesShown ++;
   ProductImages.allProducts[randomProduct2].imageTimesShown ++;
@@ -95,6 +85,16 @@ function randomProductGen(){
   ProductImages.lastShown[0] = randomProduct1;
   ProductImages.lastShown[1] = randomProduct2;
   ProductImages.lastShown[2] = randomProduct3;
+
+  //use random number to show a product three times
+  product1Element.src = ProductImages.allProducts[randomProduct1].imageSrcFilepath;
+  product1Element.alt = ProductImages.allProducts[randomProduct1].imageName;
+
+  product2Element.src = ProductImages.allProducts[randomProduct2].imageSrcFilepath;
+  product2Element.alt = ProductImages.allProducts[randomProduct2].imageName;
+
+  product3Element.src = ProductImages.allProducts[randomProduct3].imageSrcFilepath;
+  product3Element.alt = ProductImages.allProducts[randomProduct3].imageName;
 }
 
 //create a function that manages clicks for products themselves and shows results when total clicks/votes for the page hit maximum
